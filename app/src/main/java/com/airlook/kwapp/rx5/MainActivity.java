@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_flatmap:
                 flatMap();
-                interval();
                 break;
         }
 
