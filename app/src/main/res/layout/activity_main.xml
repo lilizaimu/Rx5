@@ -36,5 +36,14 @@
         android:id="@+id/btn_meger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="flatmap" />
+
+    <Button
+        android:id="@+id/btn_concat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="concat" />
+
 
 </LinearLayout>

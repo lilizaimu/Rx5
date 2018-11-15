@@ -1,6 +1,11 @@
 package com.airlook.kwapp.rx5;
 
 import android.util.Log;
+import android.widget.Toast;
+
+import com.airlook.kwapp.rx5.enumModel.SmsCodeType;
+import com.airlook.kwapp.rx5.model.BaseModel;
+import com.airlook.kwapp.rx5.model.LoginResultModel;
 
 import java.util.concurrent.TimeUnit;
 
@@ -92,6 +97,53 @@ public class PMain {
                         Log.d("onComplete", "onComplete");
                     }
                 });
+    }
+
+    String smsCode;
+
+    public void concat() {
+        Observable.concat(getSmsCode(), login(smsCode))
+                .observeOn(Schedulers.io())
+                .subscribe(new Observer<BaseModel<Object>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(BaseModel<Object> baseModel) {
+                        if (baseModel.getData() instanceof LoginResultModel) {
+                            Toast.makeText(activity, ((LoginResultModel) baseModel.getData()).getUserId(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            smsCode = "1234";
+                            Log.d("TAG", smsCode);
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    public Observable<BaseModel<Object>> login(String smsCode) {
+        return Net.getNetService().queryLogin("15653571607"
+                , "15653571607", smsCode, "ANDROID"
+                , "MI", "1.1")
+                .subscribeOn(Schedulers.io());
+    }
+
+    public Observable<BaseModel<Object>> getSmsCode() {
+        return Net.getNetService()
+                .querySmsCode("15653571607"
+                        , "15653571607"
+                        , SmsCodeType.SMSUPDATEPWD.getType())
+                .subscribeOn(Schedulers.io());
     }
 
 }

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.btn_just, R.id.btn_interval, R.id.btn_flatmap})
+    @OnClick({R.id.btn_just, R.id.btn_interval, R.id.btn_flatmap,R.id.btn_concat})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_just:
@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_flatmap:
                 flatMap();
+                break;
+            case R.id.btn_concat:
+                concat();
                 break;
         }
 
@@ -80,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void flatMap() {
         pMain.flatMap();
+    }
+
+    private void concat(){
+        pMain.concat();
     }
 
 }
