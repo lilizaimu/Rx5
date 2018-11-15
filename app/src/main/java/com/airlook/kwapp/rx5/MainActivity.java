@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.btn_just, R.id.btn_interval, R.id.btn_flatmap,R.id.btn_concat})
+    @OnClick({R.id.btn_just, R.id.btn_interval, R.id.btn_flatmap, R.id.btn_concat})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_just:
@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_concat:
                 concat();
+                break;
+            default:
+                System.out.print("");
                 break;
         }
 
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         pMain.flatMap();
     }
 
-    private void concat(){
+    private void concat() {
         pMain.concat();
     }
 
